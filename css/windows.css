@@ -1,0 +1,236 @@
+/* ============================================
+   Window Chrome
+   ============================================ */
+
+.window {
+  position: absolute;
+  background: var(--win-gray);
+  border-top:    2px solid var(--win-white);
+  border-left:   2px solid var(--win-white);
+  border-right:  2px solid var(--win-darker);
+  border-bottom: 2px solid var(--win-darker);
+  min-width: var(--window-min-width);
+  min-height: var(--window-min-height);
+  display: none;
+  flex-direction: column;
+  z-index: var(--z-window);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.window.open {
+  display: flex;
+}
+
+.window.maximized {
+  top:    0 !important;
+  left:   0 !important;
+  width:  100vw !important;
+  height: calc(100vh - var(--taskbar-height)) !important;
+}
+
+/* ---- Title Bar ---- */
+
+.title-bar {
+  background: linear-gradient(to right, var(--win-title-active-from), var(--win-title-active-to));
+  color: var(--win-white);
+  padding: 3px 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: move;
+  height: var(--titlebar-height);
+  flex-shrink: 0;
+}
+
+.title-bar.inactive {
+  background: linear-gradient(to right, var(--win-title-inactive-from), var(--win-title-inactive-to));
+}
+
+.title-bar-text {
+  font-size: var(--font-size-ui);
+  font-weight: bold;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title-bar-controls {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.title-btn {
+  width: 16px;
+  height: 14px;
+  background: var(--win-btn-face);
+  border-top:    2px solid var(--win-white);
+  border-left:   2px solid var(--win-white);
+  border-right:  2px solid var(--win-darker);
+  border-bottom: 2px solid var(--win-darker);
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  color: var(--win-black);
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.title-btn:active {
+  border-top:    2px solid var(--win-darker);
+  border-left:   2px solid var(--win-darker);
+  border-right:  2px solid var(--win-white);
+  border-bottom: 2px solid var(--win-white);
+}
+
+/* ---- Menu Bar ---- */
+
+.menu-bar {
+  background: var(--win-gray);
+  border-bottom: 1px solid var(--win-dark);
+  padding: 2px 4px;
+  display: flex;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.menu-item {
+  padding: 2px 8px;
+  cursor: pointer;
+  font-size: var(--font-size-ui);
+}
+
+.menu-item:hover {
+  background: var(--win-highlight);
+  color: var(--win-highlight-text);
+}
+
+/* ---- Address Bar (Explorer style) ---- */
+
+.address-bar {
+  background: var(--win-gray);
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--win-dark);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--font-size-ui);
+  flex-shrink: 0;
+}
+
+.address-bar label {
+  color: #555;
+}
+
+.address-input {
+  flex: 1;
+  background: var(--win-white);
+  border-top:    2px solid var(--win-dark);
+  border-left:   2px solid var(--win-dark);
+  border-right:  2px solid var(--win-white);
+  border-bottom: 2px solid var(--win-white);
+  padding: 1px 6px;
+  font-size: var(--font-size-ui);
+  font-family: var(--font-ui);
+}
+
+/* ---- Window Content Area ---- */
+
+.window-content {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--win-white);
+  border-top:    2px solid var(--win-dark);
+  border-left:   2px solid var(--win-dark);
+  border-right:  2px solid var(--win-white);
+  border-bottom: 2px solid var(--win-white);
+  margin: 4px;
+  padding: 12px;
+  font-size: var(--font-size-md);
+  line-height: 1.6;
+}
+
+/* ---- Status Bar ---- */
+
+.status-bar {
+  background: var(--win-gray);
+  border-top: 1px solid var(--win-dark);
+  padding: 2px 6px;
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.status-section {
+  border-top:    2px solid var(--win-dark);
+  border-left:   2px solid var(--win-dark);
+  border-right:  2px solid var(--win-white);
+  border-bottom: 2px solid var(--win-white);
+  padding: 1px 6px;
+  font-size: var(--font-size-ui);
+}
+
+/* ---- Resize Handle ---- */
+
+.resize-handle {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  cursor: se-resize;
+  z-index: 10;
+}
+
+/* ============================================
+   Dialog / Modal
+   ============================================ */
+
+.dialog-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-dialog);
+  display: none;
+}
+
+.dialog-overlay.open {
+  display: block;
+}
+
+.dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--win-gray);
+  border-top:    2px solid var(--win-white);
+  border-left:   2px solid var(--win-white);
+  border-right:  2px solid var(--win-darker);
+  border-bottom: 2px solid var(--win-darker);
+  min-width: 280px;
+  box-shadow: 2px 2px 0 #000;
+}
+
+.dialog-content {
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: var(--font-size-md);
+}
+
+.dialog-buttons {
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  border-top: 1px solid var(--win-dark);
+}

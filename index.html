@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio — Desktop</title>
+
+  <!-- Styles (load order matters) -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/desktop.css">
+  <link rel="stylesheet" href="css/windows.css">
+  <link rel="stylesheet" href="css/resume.css">
+  <link rel="stylesheet" href="css/content.css">
+</head>
+<body>
+
+<!-- =============================================
+     DESKTOP
+     ============================================= -->
+<div id="desktop">
+
+  <div class="desktop-icon" id="icon-resume"
+       onclick="selectIcon('icon-resume')"
+       ondblclick="openWindow('resume')">
+    <div class="icon-img" id="icon-img-resume"></div>
+    <span class="icon-label">My Resume</span>
+  </div>
+
+  <div class="desktop-icon" id="icon-projects"
+       onclick="selectIcon('icon-projects')"
+       ondblclick="openWindow('projects')">
+    <div class="icon-img" id="icon-img-projects"></div>
+    <span class="icon-label">My Projects</span>
+  </div>
+
+  <div class="desktop-icon" id="icon-socials"
+       onclick="selectIcon('icon-socials')"
+       ondblclick="openWindow('socials')">
+    <div class="icon-img" id="icon-img-socials"></div>
+    <span class="icon-label">My Socials</span>
+  </div>
+
+</div>
+
+<!-- =============================================
+     TASKBAR
+     ============================================= -->
+<div id="taskbar">
+
+  <button class="win-btn" id="start-btn" onclick="toggleStartMenu()">
+    <span id="win-logo-taskbar"></span>
+    <b>Start</b>
+  </button>
+
+  <div id="taskbar-divider"></div>
+
+  <div class="taskbar-task" id="task-resume" onclick="toggleWindow('resume')">
+    <span id="task-icon-resume"></span> My Resume
+  </div>
+  <div class="taskbar-task" id="task-projects" onclick="toggleWindow('projects')">
+    <span id="task-icon-projects"></span> My Projects
+  </div>
+  <div class="taskbar-task" id="task-socials" onclick="toggleWindow('socials')">
+    <span id="task-icon-socials"></span> My Socials
+  </div>
+
+  <div id="clock"></div>
+</div>
+
+<!-- =============================================
+     START MENU
+     ============================================= -->
+<div id="start-menu">
+  <div class="start-sidebar"><span>Windows 97</span></div>
+  <div class="start-items">
+    <div class="start-item" onclick="openWindow('resume'); toggleStartMenu()">
+      <span id="start-icon-resume"></span> My Resume
+    </div>
+    <div class="start-item" onclick="openWindow('projects'); toggleStartMenu()">
+      <span id="start-icon-projects"></span> My Projects
+    </div>
+    <div class="start-item" onclick="openWindow('socials'); toggleStartMenu()">
+      <span id="start-icon-socials"></span> My Socials
+    </div>
+    <div class="start-separator"></div>
+    <div class="start-item" onclick="showAbout()">
+      <span id="start-icon-about"></span> About Me
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     WINDOW: MY RESUME
+     ============================================= -->
+<div class="window" id="win-resume" style="top:60px; left:80px; width:540px; height:520px;">
+  <div class="title-bar" id="tb-resume">
+    <div class="title-bar-text">
+      <span id="tb-icon-resume" style="display:flex;align-items:center;"></span>
+      My Resume — Notepad
+    </div>
+    <div class="title-bar-controls">
+      <div class="title-btn" onclick="minimizeWindow('resume')" title="Minimize">_</div>
+      <div class="title-btn" onclick="maximizeWindow('resume')" title="Maximize">□</div>
+      <div class="title-btn" onclick="closeWindow('resume')"   title="Close">✕</div>
+    </div>
+  </div>
+  <div class="menu-bar">
+    <span class="menu-item">File</span>
+    <span class="menu-item">Edit</span>
+    <span class="menu-item">View</span>
+    <span class="menu-item">Help</span>
+  </div>
+  <!-- Content injected by resumeParser.js -->
+  <div class="window-content" id="content-resume"></div>
+  <div class="status-bar">
+    <div class="status-section" id="resume-status">No file loaded</div>
+    <div class="status-section">Ready</div>
+  </div>
+  <div class="resize-handle" id="rh-resume"><span id="rh-svg-resume"></span></div>
+</div>
+
+<!-- =============================================
+     WINDOW: MY PROJECTS
+     ============================================= -->
+<div class="window" id="win-projects" style="top:100px; left:160px; width:560px; height:500px;">
+  <div class="title-bar" id="tb-projects">
+    <div class="title-bar-text">
+      <span id="tb-icon-projects" style="display:flex;align-items:center;"></span>
+      My Projects — File Explorer
+    </div>
+    <div class="title-bar-controls">
+      <div class="title-btn" onclick="minimizeWindow('projects')">_</div>
+      <div class="title-btn" onclick="maximizeWindow('projects')">□</div>
+      <div class="title-btn" onclick="closeWindow('projects')">✕</div>
+    </div>
+  </div>
+  <div class="menu-bar">
+    <span class="menu-item">File</span>
+    <span class="menu-item">Edit</span>
+    <span class="menu-item">View</span>
+    <span class="menu-item">Favorites</span>
+    <span class="menu-item">Help</span>
+  </div>
+  <div class="address-bar">
+    <label>Address:</label>
+    <div class="address-input">C:\Users\Me\Projects</div>
+  </div>
+  <div class="window-content" id="content-projects">
+    <!-- Injected by app.js -->
+  </div>
+  <div class="status-bar">
+    <div class="status-section" id="projects-count">0 object(s)</div>
+    <div class="status-section" style="margin-left:auto;">✅ My Computer</div>
+  </div>
+  <div class="resize-handle" id="rh-projects"><span id="rh-svg-projects"></span></div>
+</div>
+
+<!-- =============================================
+     WINDOW: MY SOCIALS
+     ============================================= -->
+<div class="window" id="win-socials" style="top:140px; left:240px; width:440px; height:400px;">
+  <div class="title-bar" id="tb-socials">
+    <div class="title-bar-text">
+      <span id="tb-icon-socials" style="display:flex;align-items:center;"></span>
+      My Socials — Internet Explorer
+    </div>
+    <div class="title-bar-controls">
+      <div class="title-btn" onclick="minimizeWindow('socials')">_</div>
+      <div class="title-btn" onclick="maximizeWindow('socials')">□</div>
+      <div class="title-btn" onclick="closeWindow('socials')">✕</div>
+    </div>
+  </div>
+  <div class="menu-bar">
+    <span class="menu-item">File</span>
+    <span class="menu-item">Edit</span>
+    <span class="menu-item">View</span>
+    <span class="menu-item">Favorites</span>
+    <span class="menu-item">Help</span>
+  </div>
+  <div class="address-bar">
+    <label>Address:</label>
+    <div class="address-input" id="socials-address">https://me.internet/socials</div>
+    <button class="win-btn" style="font-size:10px; padding:1px 10px; height:18px;">Go</button>
+  </div>
+  <div class="window-content" id="content-socials">
+    <!-- Injected by app.js -->
+  </div>
+  <div class="status-bar">
+    <div class="status-section" id="socials-count">0 link(s)</div>
+    <div class="status-section" style="margin-left:auto;">🌐 Internet zone</div>
+  </div>
+  <div class="resize-handle" id="rh-socials"><span id="rh-svg-socials"></span></div>
+</div>
+
+<!-- =============================================
+     ABOUT DIALOG
+     ============================================= -->
+<div class="dialog-overlay" id="about-dialog">
+  <div class="dialog">
+    <div class="title-bar">
+      <div class="title-bar-text">About This Portfolio</div>
+      <div class="title-bar-controls">
+        <div class="title-btn" onclick="closeAbout()">✕</div>
+      </div>
+    </div>
+    <div class="dialog-content">
+      <div style="font-size:40px;line-height:1;flex-shrink:0;" id="about-logo"></div>
+      <div>
+        <div style="font-weight:bold;font-size:14px;margin-bottom:4px;">My Portfolio v1.0</div>
+        <div style="font-size:11px;margin-bottom:8px;color:#333;">Built with HTML, CSS &amp; JavaScript</div>
+        <div style="font-size:11px;">
+          A Windows 97–themed personal profile website.<br>
+          Double-click any desktop icon to open a window.
+        </div>
+        <div style="margin-top:10px;">
+          <div style="font-size:10px;color:#666;">This product is licensed to:</div>
+          <div style="font-size:11px;font-weight:bold;" id="about-name"></div>
+          <div style="font-size:10px;color:#666;">Serial: WIN97-PORT-0001</div>
+        </div>
+      </div>
+    </div>
+    <div class="dialog-buttons">
+      <button class="win-btn" style="min-width:80px;" onclick="closeAbout()">OK</button>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     SCRIPTS (load order: config → icons → managers → features)
+     ============================================= -->
+<script src="js/config.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/windowManager.js"></script>
+<script src="js/desktop.js"></script>
+<script src="js/resumeParser.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

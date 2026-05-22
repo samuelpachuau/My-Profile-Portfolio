@@ -1,0 +1,49 @@
+/* ============================================
+   Windows 97 Design Tokens & CSS Variables
+   ============================================ */
+
+:root {
+  /* Core Win97 colors */
+  --win-gray:             #c0c0c0;
+  --win-dark:             #808080;
+  --win-darker:           #404040;
+  --win-white:            #ffffff;
+  --win-black:            #000000;
+  --win-blue:             #000080;
+  --win-desktop:          #008080;
+  --win-highlight:        #000080;
+  --win-highlight-text:   #ffffff;
+  --win-btn-face:         #c0c0c0;
+
+  /* Title bar gradients */
+  --win-title-active-from:   #000080;
+  --win-title-active-to:     #1084d0;
+  --win-title-inactive-from: #808080;
+  --win-title-inactive-to:   #b0b0b0;
+
+  /* Border shorthands (Win97 3D bevel system) */
+  --border-raised-outer: 2px solid var(--win-white);
+  --border-raised-inner: none;
+  --border-sunken-outer: 2px solid var(--win-darker);
+  --border-sunken-inner: none;
+
+  /* Typography */
+  --font-ui: 'MS Sans Serif', 'Microsoft Sans Serif', Arial, sans-serif;
+  --font-size-ui: 11px;
+  --font-size-sm: 10px;
+  --font-size-md: 12px;
+  --font-size-lg: 14px;
+
+  /* Z-index layers */
+  --z-desktop:   1;
+  --z-window:    100;
+  --z-taskbar:   999;
+  --z-startmenu: 1000;
+  --z-dialog:    2000;
+
+  /* Window defaults */
+  --window-min-width:  300px;
+  --window-min-height: 200px;
+  --taskbar-height:    28px;
+  --titlebar-height:   20px;
+}
