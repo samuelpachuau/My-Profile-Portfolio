@@ -1,9 +1,12 @@
 /**
  * Desktop
- * Handles desktop icon selection, start menu toggle, clock, and About dialog.
+ * Clock, icon selection, start menu, About dialog.
+ * On mobile: single tap opens a window (no double-click needed).
  */
 
 const Desktop = (() => {
+
+  const isMobile = () => window.innerWidth <= 600;
 
   // ---- Clock ----
 
@@ -53,19 +56,22 @@ const Desktop = (() => {
     document.getElementById('about-dialog')?.classList.remove('open');
   }
 
-  // ---- Init ----
+  // ---- Icon interaction ----
+  // Desktop: double-click opens window.
+  // Mobile:  single tap opens window immediately.
 
-  function init() {
-    updateClock();
-    setInterval(updateClock, 1000);
-
-    document.getElementById('desktop')?.addEventListener('click', clearSelection);
-    document.addEventListener('click', closeStartMenu);
-
-    // Desktop icons: treat double-click and two quick single clicks the same
+  function attachIconListeners() {
     document.querySelectorAll('.desktop-icon').forEach(icon => {
+      // Mobile: single tap
+      icon.addEventListener('touchend', e => {
+        e.preventDefault();
+        icon.dispatchEvent(new Event('dblclick'));
+      });
+
+      // Desktop: two quick clicks = double-click
       let clicks = 0;
       icon.addEventListener('click', () => {
+        if (isMobile()) return; // handled by touchend
         clicks++;
         if (clicks === 1) {
           setTimeout(() => { clicks = 0; }, 400);
@@ -77,10 +83,21 @@ const Desktop = (() => {
     });
   }
 
+  // ---- Init ----
+
+  function init() {
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    document.getElementById('desktop')?.addEventListener('click', clearSelection);
+    document.addEventListener('click', closeStartMenu);
+
+    attachIconListeners();
+  }
+
   return { init, selectIcon, toggleStartMenu, showAbout, closeAbout };
 })();
 
-// Expose globals used by inline handlers
 window.selectIcon      = (id) => Desktop.selectIcon(id);
 window.toggleStartMenu = ()   => Desktop.toggleStartMenu();
 window.showAbout       = ()   => Desktop.showAbout();

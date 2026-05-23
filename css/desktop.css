@@ -2,6 +2,8 @@
    Desktop
    ============================================ */
 
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
 #desktop {
   width: 100vw;
   height: calc(100vh - var(--taskbar-height));
@@ -16,8 +18,6 @@
 /* ============================================
    Desktop Greeting
    ============================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
 #desktop-greeting {
   position: absolute;
@@ -35,9 +35,7 @@
   font-family: 'VT323', 'Courier New', monospace;
   font-size: 28px;
   color: rgba(255, 255, 255, 0.82);
-  text-shadow:
-    1px 1px 0 rgba(0, 0, 0, 0.5),
-    0 0 12px rgba(0, 0, 0, 0.3);
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.5), 0 0 12px rgba(0,0,0,0.3);
   letter-spacing: 1px;
   line-height: 1.1;
 }
@@ -46,13 +44,13 @@
   font-family: 'VT323', 'Courier New', monospace;
   font-size: 18px;
   color: rgba(255, 255, 255, 0.6);
-  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 /* ============================================
-   Desktop Icons
+   Desktop Icons — default (left column)
    ============================================ */
 
 .desktop-icon {
@@ -126,17 +124,14 @@
   border-right: 1px solid var(--win-white);
 }
 
-/* Start button */
 #start-btn {
   font-weight: bold;
   font-size: 12px;
+  flex-shrink: 0;
 }
 
-#start-btn svg {
-  image-rendering: pixelated;
-}
+#start-btn svg { image-rendering: pixelated; }
 
-/* Taskbar task buttons */
 .taskbar-task {
   background: var(--win-btn-face);
   border-top:    2px solid var(--win-white);
@@ -158,9 +153,7 @@
   gap: 4px;
 }
 
-.taskbar-task.visible {
-  display: flex;
-}
+.taskbar-task.visible { display: flex; }
 
 .taskbar-task.active {
   border-top:    2px solid var(--win-darker);
@@ -170,7 +163,6 @@
   background: var(--win-gray);
 }
 
-/* Clock */
 #clock {
   margin-left: auto;
   border-top:    2px solid var(--win-dark);
@@ -184,6 +176,7 @@
   align-items: center;
   min-width: 60px;
   justify-content: center;
+  flex-shrink: 0;
 }
 
 /* ============================================
@@ -205,9 +198,7 @@
   box-shadow: 2px 2px 0 #000;
 }
 
-#start-menu.open {
-  display: flex;
-}
+#start-menu.open { display: flex; }
 
 .start-sidebar {
   width: 24px;
@@ -227,10 +218,7 @@
   letter-spacing: 2px;
 }
 
-.start-items {
-  flex: 1;
-  padding: 2px 0;
-}
+.start-items { flex: 1; padding: 2px 0; }
 
 .start-item {
   display: flex;
@@ -251,4 +239,62 @@
   background: var(--win-dark);
   margin: 3px 4px;
   border-bottom: 1px solid var(--win-white);
+}
+
+/* ============================================
+   MOBILE — breakpoint ≤ 600px
+   ============================================ */
+
+@media (max-width: 600px) {
+
+  /* Desktop: center icons in a 2-column grid */
+  #desktop {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    place-content: center;
+    gap: 20px;
+    padding: 16px;
+    /* push icons down below greeting */
+    padding-top: 90px;
+  }
+
+  /* Greeting moves to top-center */
+  #desktop-greeting {
+    position: absolute;
+    top: 18px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    align-items: center;
+  }
+
+  #greeting-name  { font-size: 22px; }
+  #greeting-title { font-size: 14px; letter-spacing: 3px; }
+
+  /* Icons slightly larger tap targets */
+  .desktop-icon {
+    width: 80px;
+    padding: 8px 4px;
+  }
+
+  .desktop-icon .icon-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .desktop-icon .icon-label {
+    font-size: 12px;
+  }
+
+  /* Taskbar: hide task buttons (no room), keep start + clock */
+  .taskbar-task { display: none !important; }
+  #taskbar-divider { display: none; }
+
+  /* Start menu: full width on mobile */
+  #start-menu {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
 }

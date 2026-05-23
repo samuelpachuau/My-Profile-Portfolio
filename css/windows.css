@@ -234,3 +234,50 @@
   gap: 8px;
   border-top: 1px solid var(--win-dark);
 }
+
+/* ============================================
+   MOBILE — windows go full-screen
+   ============================================ */
+
+@media (max-width: 600px) {
+
+  /* All open windows fill the screen above the taskbar */
+  .window.open {
+    position: fixed !important;
+    top:    0 !important;
+    left:   0 !important;
+    width:  100vw !important;
+    height: calc(100vh - var(--taskbar-height)) !important;
+    min-width:  unset !important;
+    min-height: unset !important;
+    z-index: var(--z-window) !important;
+    box-shadow: none;
+  }
+
+  /* Hide minimize + maximize buttons — only close makes sense */
+  .title-btn:nth-child(1),
+  .title-btn:nth-child(2) {
+    display: none;
+  }
+
+  /* Hide resize handle — no resizing on mobile */
+  .resize-handle { display: none; }
+
+  /* Slightly larger tap target for close button */
+  .title-btn:nth-child(3) {
+    width: 22px;
+    height: 20px;
+    font-size: 11px;
+  }
+
+  /* Bigger touch-friendly menu items */
+  .menu-item {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+
+  /* Social rows: larger tap area */
+  .social-row {
+    padding: 12px 8px;
+  }
+}

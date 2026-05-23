@@ -2,18 +2,19 @@
  * WindowManager
  * Handles all window lifecycle: open, close, minimize, maximize,
  * dragging, resizing, focus/z-index, and taskbar state.
+ * On mobile (≤600px) windows open full-screen; drag/resize are disabled.
  */
 
 const WindowManager = (() => {
   const state = {
-    open:      {},   // name -> bool
-    minimized: {},   // name -> bool
-    maximized: {},   // name -> bool
-    savedPos:  {},   // name -> { top, left, width, height }
+    open:      {},
+    minimized: {},
+    maximized: {},
+    savedPos:  {},
     zTop:      100,
   };
 
-  // ---- Internal helpers ----
+  const isMobile = () => window.innerWidth <= 600;
 
   function getEl(name)   { return document.getElementById('win-' + name); }
   function getTb(name)   { return document.getElementById('tb-'  + name); }
@@ -21,7 +22,6 @@ const WindowManager = (() => {
 
   function updateTaskbarButtons() {
     document.querySelectorAll('.taskbar-task').forEach(t => t.classList.remove('active'));
-    // Mark the top-most visible window's task as active
     let topName = null, topZ = 0;
     Object.keys(state.open).forEach(name => {
       if (!state.open[name] || state.minimized[name]) return;
@@ -41,10 +41,8 @@ const WindowManager = (() => {
     });
   }
 
-  // ---- Public API ----
-
   function open(name) {
-    const el = getEl(name);
+    const el   = getEl(name);
     const task = getTask(name);
     if (!el) return;
     state.open[name]      = true;
@@ -71,6 +69,8 @@ const WindowManager = (() => {
   }
 
   function minimize(name) {
+    // On mobile, minimize = close (no taskbar buttons visible)
+    if (isMobile()) { close(name); return; }
     const el   = getEl(name);
     const task = getTask(name);
     state.minimized[name] = true;
@@ -81,14 +81,13 @@ const WindowManager = (() => {
   }
 
   function maximize(name) {
+    if (isMobile()) return; // always full-screen on mobile via CSS
     const el = getEl(name);
     if (!el) return;
     if (!state.maximized[name]) {
       state.savedPos[name] = {
-        top:    el.style.top,
-        left:   el.style.left,
-        width:  el.style.width,
-        height: el.style.height,
+        top: el.style.top, left: el.style.left,
+        width: el.style.width, height: el.style.height,
       };
       el.classList.add('maximized');
       state.maximized[name] = true;
@@ -108,10 +107,7 @@ const WindowManager = (() => {
   function toggle(name) {
     const el = getEl(name);
     if (!el) return;
-    if (!state.open[name]) {
-      open(name);
-      return;
-    }
+    if (!state.open[name]) { open(name); return; }
     if (state.minimized[name]) {
       state.minimized[name] = false;
       el.style.display = 'flex';
@@ -129,12 +125,11 @@ const WindowManager = (() => {
     if (el) el.style.zIndex = state.zTop;
     updateTitleBars();
     updateTaskbarButtons();
-    // Mark correct task active
     document.querySelectorAll('.taskbar-task').forEach(t => t.classList.remove('active'));
     getTask(name)?.classList.add('active');
   }
 
-  // ---- Drag ----
+  // ---- Drag (desktop only) ----
 
   function makeDraggable(name) {
     const el     = getEl(name);
@@ -144,13 +139,12 @@ const WindowManager = (() => {
     let dragging = false, startX, startY, initX, initY;
 
     handle.addEventListener('mousedown', e => {
+      if (isMobile()) return;
       if (e.target.classList.contains('title-btn')) return;
       if (state.maximized[name]) return;
       dragging = true;
-      startX = e.clientX;
-      startY = e.clientY;
-      initX  = el.offsetLeft;
-      initY  = el.offsetTop;
+      startX = e.clientX; startY = e.clientY;
+      initX  = el.offsetLeft; initY = el.offsetTop;
       e.preventDefault();
     });
 
@@ -163,7 +157,7 @@ const WindowManager = (() => {
     document.addEventListener('mouseup', () => { dragging = false; });
   }
 
-  // ---- Resize ----
+  // ---- Resize (desktop only) ----
 
   function makeResizable(name) {
     const el     = getEl(name);
@@ -173,11 +167,10 @@ const WindowManager = (() => {
     let resizing = false, startX, startY, startW, startH;
 
     handle.addEventListener('mousedown', e => {
+      if (isMobile()) return;
       resizing = true;
-      startX = e.clientX;
-      startY = e.clientY;
-      startW = el.offsetWidth;
-      startH = el.offsetHeight;
+      startX = e.clientX; startY = e.clientY;
+      startW = el.offsetWidth; startH = el.offsetHeight;
       e.preventDefault();
       e.stopPropagation();
     });
@@ -191,15 +184,11 @@ const WindowManager = (() => {
     document.addEventListener('mouseup', () => { resizing = false; });
   }
 
-  // ---- Click-to-focus on any window mousedown ----
-
   function registerFocusOnClick(name) {
     const el = getEl(name);
     if (!el) return;
     el.addEventListener('mousedown', () => focus(name));
   }
-
-  // ---- Init all windows ----
 
   function init(names) {
     names.forEach(name => {
@@ -212,7 +201,6 @@ const WindowManager = (() => {
   return { open, close, minimize, maximize, toggle, focus, init };
 })();
 
-// Expose as globals for inline HTML handlers
 window.openWindow     = (n) => WindowManager.open(n);
 window.closeWindow    = (n) => WindowManager.close(n);
 window.minimizeWindow = (n) => WindowManager.minimize(n);
