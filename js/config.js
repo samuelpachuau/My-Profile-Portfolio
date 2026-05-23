@@ -22,7 +22,7 @@ const CONFIG = {
         type: 'blocks',
         items: [
           {
-            title:    'Data Analyst Intern  |  Remote',
+            title:    "Data Analyst Intern  |  Mar-Apr 26'",
             subtitle: 'Built reports in IBM Cognos Analytics to analyze project performance, employee attrition, budgeting, and resource utilization.',
             bullets:  [
               'Conducted a business analytics case study, uncovering operational insights through data visualization and story-based reports.',
@@ -31,7 +31,7 @@ const CONFIG = {
             ],
           },
           {
-            title:    'Software Engineering Development Intern  |  On-Site',
+            title:    "Software Engineering Development Intern  |  Jul-Aug 25'",
             subtitle: 'Independently developed a full-stack E-Ticketing System as part of an internship project, covering event creation, booking management, and user/admin authentication.',
             bullets:  [
               'Implemented QR-code-based e-tickets with seat allocation and real-time booking verification, streamlining event entry.',
