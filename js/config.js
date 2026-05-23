@@ -4,7 +4,7 @@ const CONFIG = {
   // ---- Personal info ----
   name:     'Samuel Lalmuanpuia Pachuau',
   title:    'Software Engineer',
-  location: 'Chennai, India',
+  location: 'Mizoram, India',
 
   // ---- Resume ----
   resume: {
@@ -104,32 +104,16 @@ const CONFIG = {
   // ---- Projects ----
   projects: [
     {
-      title:  'DevLink — Developer Networking Platform',
-      desc:   'A platform where developers connect, share projects and find collaborators. Features real-time chat and a project matching algorithm.',
-      tags:   ['React', 'Node.js', 'PostgreSQL', 'Socket.io'],
-      github: 'https://github.com/samuel/devlink',
-      demo:   'https://devlink.example.com',
+      title:  'Event Management',
+      desc:   'A platform where you can host event, search for events and book ticket for event.',
+      tags:   ['PHP','Laravel', 'SQLite'],
+      github: 'https://github.com/samuelpachuau/EventManagement',
     },
     {
-      title:  'AutoDocs — AI Documentation Generator',
-      desc:   'CLI tool that automatically generates README and API docs from source code using LLMs. Supports Python, JS and Go. 500+ GitHub stars.',
-      tags:   ['Python', 'OpenAI API', 'CLI', 'AST Parsing'],
-      github: 'https://github.com/samuel/autodocs',
-      demo:   '',
-    },
-    {
-      title:  'BudgetOS — Personal Finance Tracker',
-      desc:   'Progressive web app for tracking expenses, income and savings goals with smart categorisation and monthly insights. Offline-first.',
-      tags:   ['TypeScript', 'React', 'PWA', 'Chart.js'],
-      github: 'https://github.com/samuel/budgetos',
-      demo:   'https://budgetos.example.com',
-    },
-    {
-      title:  'VaultPass — Local Password Manager',
-      desc:   'Electron desktop app for managing passwords locally with AES-256 encryption. No cloud sync — your data never leaves your machine.',
-      tags:   ['Electron', 'React', 'AES-256', 'SQLite'],
-      github: 'https://github.com/samuel/vaultpass',
-      demo:   '',
+      title:  'REHABit',
+      desc:   'A gamified habit-tracking app with streak tracking, freeze options, heatmap progress visualization, and a rewards system.',
+      tags:   ['React', 'Node.js', 'Express.js', 'SQLite', 'Ollama', 'Tailwind CSS'],
+      github: 'https://github.com/samuelpachuau/REHABit',
     },
   ],
 };

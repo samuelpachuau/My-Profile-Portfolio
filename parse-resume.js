@@ -1,18 +1,4 @@
-#!/usr/bin/env node
-/**
- * parse-resume.js
- * ============================================
- * One-time script: converts your .docx resume into
- * the resume section of js/config.js.
- *
- * Usage:
- *   npm install mammoth          (first time only)
- *   node parse-resume.js resume.docx
- *
- * It will overwrite js/config.js with your real data.
- * Run it once, then you never need it again.
- * ============================================
- */
+
 
 const fs      = require('fs');
 const path    = require('path');
