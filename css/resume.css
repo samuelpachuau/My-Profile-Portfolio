@@ -2,57 +2,6 @@
    Resume Window — Content Styles
    ============================================ */
 
-/* Upload prompt */
-.resume-upload-prompt {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  gap: 16px;
-  padding: 24px;
-  text-align: center;
-}
-
-.resume-upload-prompt .upload-icon {
-  font-size: 48px;
-  line-height: 1;
-}
-
-.resume-upload-prompt h2 {
-  font-size: 14px;
-  font-weight: bold;
-  color: var(--win-blue);
-}
-
-.resume-upload-prompt p {
-  font-size: 11px;
-  color: #555;
-  max-width: 300px;
-}
-
-.upload-drop-zone {
-  border: 2px dashed var(--win-dark);
-  padding: 24px 32px;
-  text-align: center;
-  background: #f0f0f0;
-  cursor: pointer;
-  font-size: 11px;
-  color: #444;
-  transition: background 0.1s;
-}
-
-.upload-drop-zone:hover,
-.upload-drop-zone.dragover {
-  background: #d0e8ff;
-  border-color: var(--win-blue);
-}
-
-.upload-drop-zone input[type="file"] {
-  display: none;
-}
-
-/* Parsed resume content */
 .resume-name {
   font-size: 20px;
   font-weight: bold;
@@ -64,6 +13,7 @@
   font-size: 11px;
   color: #555;
   margin-bottom: 12px;
+  line-height: 1.8;
 }
 
 .resume-section {
@@ -105,6 +55,7 @@
 .resume-section p {
   font-size: 11px;
   color: #333;
+  line-height: 1.6;
 }
 
 /* Skill tags */
@@ -123,50 +74,4 @@
   border-left:   1px solid #4444cc;
   border-right:  1px solid #000040;
   border-bottom: 1px solid #000040;
-}
-
-/* Loading state */
-.resume-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  flex-direction: column;
-  gap: 12px;
-  font-size: 12px;
-  color: #555;
-}
-
-.progress-bar-outer {
-  border-top:    2px solid var(--win-dark);
-  border-left:   2px solid var(--win-dark);
-  border-right:  2px solid var(--win-white);
-  border-bottom: 2px solid var(--win-white);
-  height: 16px;
-  width: 240px;
-  background: var(--win-white);
-  overflow: hidden;
-}
-
-.progress-bar-inner {
-  height: 100%;
-  background: var(--win-blue);
-  display: flex;
-  align-items: center;
-  padding-left: 4px;
-  color: var(--win-white);
-  font-size: 10px;
-  transition: width 0.4s ease;
-}
-
-/* Error state */
-.resume-error {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  height: 100%;
-  font-size: 12px;
-  color: #800000;
 }

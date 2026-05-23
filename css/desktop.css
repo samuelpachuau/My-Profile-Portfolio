@@ -14,6 +14,44 @@
 }
 
 /* ============================================
+   Desktop Greeting
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+#desktop-greeting {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  pointer-events: none;
+}
+
+#greeting-name {
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 28px;
+  color: rgba(255, 255, 255, 0.82);
+  text-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.5),
+    0 0 12px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+  line-height: 1.1;
+}
+
+#greeting-title {
+  font-family: 'VT323', 'Courier New', monospace;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ============================================
    Desktop Icons
    ============================================ */
 
