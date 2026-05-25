@@ -1,77 +1,56 @@
 /* ============================================
-   Resume Window — Content Styles
+   Resume Window — PDF Embed
    ============================================ */
-
-.resume-name {
-  font-size: 20px;
-  font-weight: bold;
-  color: var(--win-blue);
-  margin-bottom: 4px;
+ 
+/* PDF fills the entire window body below the title bar */
+.pdf-embed {
+  flex: 1;
+  width: 100%;
+  border: none;
+  display: block;
+  background: #525659; /* matches Acrobat's dark chrome */
 }
-
-.resume-contact {
-  font-size: 11px;
-  color: #555;
-  margin-bottom: 12px;
-  line-height: 1.8;
+ 
+/* Mobile fallback — hidden on desktop */
+.pdf-mobile-fallback {
+  display: none;
 }
-
-.resume-section {
-  margin-bottom: 16px;
-}
-
-.resume-section h2 {
-  font-size: 12px;
-  font-weight: bold;
-  border-bottom: 2px solid var(--win-blue);
-  padding-bottom: 2px;
-  margin-bottom: 6px;
-  color: var(--win-blue);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.resume-section h3 {
-  font-size: 12px;
-  font-weight: bold;
-  margin-bottom: 2px;
-}
-
-.resume-section .subtitle {
-  color: #555;
-  font-size: 11px;
-  margin-bottom: 4px;
-}
-
-.resume-section ul {
-  padding-left: 16px;
-}
-
-.resume-section li {
-  font-size: 11px;
-  margin-bottom: 2px;
-}
-
-.resume-section p {
-  font-size: 11px;
-  color: #333;
-  line-height: 1.6;
-}
-
-/* Skill tags */
-.skill-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.skill-tag {
-  background: var(--win-blue);
-  color: var(--win-white);
-  padding: 2px 8px;
-  font-size: 10px;
-  border-top:    1px solid #4444cc;
-  border-left:   1px solid #4444cc;
-  border-right:  1px solid #000040;
-  border-bottom: 1px solid #000040;
+ 
+/* ============================================
+   MOBILE
+   ============================================ */
+ 
+@media (max-width: 600px) {
+ 
+  /* Hide the embed on mobile — unreliable in mobile browsers */
+  .pdf-embed {
+    display: none;
+  }
+ 
+  /* Show the fallback instead */
+  .pdf-mobile-fallback {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    background: var(--win-white);
+    font-size: 12px;
+    color: #444;
+    text-align: center;
+    padding: 24px;
+  }
+ 
+  .pdf-mobile-fallback p {
+    max-width: 220px;
+    line-height: 1.5;
+  }
+ 
+  .pdf-mobile-fallback .win-btn {
+    height: 28px;
+    font-size: 12px;
+    padding: 4px 16px;
+    text-decoration: none;
+  }
 }

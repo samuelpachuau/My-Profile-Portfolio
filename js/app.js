@@ -36,68 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (aboutName) aboutName.textContent = CONFIG.name;
 
   // ---- Render windows ----
-  renderResume();
   renderProjects();
   renderSocials();
 
   // ---- Init window manager ----
   WindowManager.init(['resume', 'projects', 'socials']);
 });
-
-// =============================================
-// Resume — rendered statically from CONFIG
-// =============================================
-
-function renderResume() {
-  const content  = document.getElementById('content-resume');
-  const statusEl = document.getElementById('resume-status');
-  if (!content) return;
-
-  const r = CONFIG.resume;
-  if (!r) { content.innerHTML = '<p style="color:#555;">No resume data in config.js.</p>'; return; }
-
-  let html = '';
-
-  // Name
-  html += `<div class="resume-name">${escHtml(r.name)}</div>`;
-
-  // Contact
-  if (r.contact && r.contact.length) {
-    html += `<div class="resume-contact">${r.contact.map(escHtml).join(' &nbsp;|&nbsp; ')}</div>`;
-  }
-
-  // Sections
-  (r.sections || []).forEach(sec => {
-    html += `<div class="resume-section"><h2>${escHtml(sec.heading)}</h2>`;
-
-    if (sec.type === 'paragraphs') {
-      sec.items.forEach(p => { html += `<p>${escHtml(p)}</p>`; });
-
-    } else if (sec.type === 'blocks') {
-      sec.items.forEach(block => {
-        html += `<h3>${escHtml(block.title)}</h3>`;
-        if (block.subtitle) html += `<div class="subtitle">${escHtml(block.subtitle)}</div>`;
-        if (block.bullets && block.bullets.length) {
-          html += '<ul>' + block.bullets.map(b => `<li>${escHtml(b)}</li>`).join('') + '</ul>';
-        }
-        html += '<br>';
-      });
-
-    } else if (sec.type === 'tags') {
-      html += '<div class="skill-grid">';
-      sec.items.forEach(tag => { html += `<span class="skill-tag">${escHtml(tag)}</span>`; });
-      html += '</div>';
-
-    } else if (sec.type === 'bullets') {
-      html += '<ul>' + sec.items.map(b => `<li>${escHtml(b)}</li>`).join('') + '</ul>';
-    }
-
-    html += '</div>';
-  });
-
-  content.innerHTML = html;
-  if (statusEl) statusEl.textContent = `${r.name}_resume.docx`;
-}
 
 // =============================================
 // Projects

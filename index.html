@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Samuel's Portfolio</title>
-
+  <title>Portfolio — Desktop</title>
+ 
   <!-- Styles (load order matters) -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
@@ -14,52 +14,52 @@
   <link rel="stylesheet" href="css/content.css">
 </head>
 <body>
-
+ 
 <!-- =============================================
      DESKTOP
      ============================================= -->
 <div id="desktop">
-
+ 
   <div id="desktop-greeting">
     <span id="greeting-name">Hi, I'm Samuel</span>
     <span id="greeting-title">Software Engineer</span>
   </div>
-
+ 
   <div class="desktop-icon" id="icon-resume"
        onclick="selectIcon('icon-resume')"
        ondblclick="openWindow('resume')">
     <div class="icon-img" id="icon-img-resume"></div>
     <span class="icon-label">My Resume</span>
   </div>
-
+ 
   <div class="desktop-icon" id="icon-projects"
        onclick="selectIcon('icon-projects')"
        ondblclick="openWindow('projects')">
     <div class="icon-img" id="icon-img-projects"></div>
     <span class="icon-label">My Projects</span>
   </div>
-
+ 
   <div class="desktop-icon" id="icon-socials"
        onclick="selectIcon('icon-socials')"
        ondblclick="openWindow('socials')">
     <div class="icon-img" id="icon-img-socials"></div>
     <span class="icon-label">My Socials</span>
   </div>
-
+ 
 </div>
-
+ 
 <!-- =============================================
      TASKBAR
      ============================================= -->
 <div id="taskbar">
-
+ 
   <button class="win-btn" id="start-btn" onclick="toggleStartMenu()">
     <span id="win-logo-taskbar"></span>
     <b>Start</b>
   </button>
-
+ 
   <div id="taskbar-divider"></div>
-
+ 
   <div class="taskbar-task" id="task-resume" onclick="toggleWindow('resume')">
     <span id="task-icon-resume"></span> My Resume
   </div>
@@ -69,10 +69,10 @@
   <div class="taskbar-task" id="task-socials" onclick="toggleWindow('socials')">
     <span id="task-icon-socials"></span> My Socials
   </div>
-
+ 
   <div id="clock"></div>
 </div>
-
+ 
 <!-- =============================================
      START MENU
      ============================================= -->
@@ -94,15 +94,15 @@
     </div>
   </div>
 </div>
-
+ 
 <!-- =============================================
      WINDOW: MY RESUME
      ============================================= -->
-<div class="window" id="win-resume" style="top:60px; left:80px; width:540px; height:520px;">
+<div class="window" id="win-resume" style="top:60px; left:80px; width:580px; height:700px;">
   <div class="title-bar" id="tb-resume">
     <div class="title-bar-text">
       <span id="tb-icon-resume" style="display:flex;align-items:center;"></span>
-      My Resume — Notepad
+      samuel_resume.pdf — Adobe Acrobat
     </div>
     <div class="title-bar-controls">
       <div class="title-btn" onclick="minimizeWindow('resume')" title="Minimize">_</div>
@@ -110,21 +110,27 @@
       <div class="title-btn" onclick="closeWindow('resume')"   title="Close">✕</div>
     </div>
   </div>
-  <div class="menu-bar">
-    <span class="menu-item">File</span>
-    <span class="menu-item">Edit</span>
-    <span class="menu-item">View</span>
-    <span class="menu-item">Help</span>
+ 
+  <!-- PDF embed — fills the entire window body -->
+  <embed
+    id="resume-pdf"
+    src="assets/Resume.pdf"
+    type="application/pdf"
+    class="pdf-embed"
+  />
+ 
+  <!-- Mobile fallback (hidden on desktop via CSS) -->
+  <div class="pdf-mobile-fallback">
+    <div style="font-size:32px;">📄</div>
+    <p>PDF preview isn't available on mobile browsers.</p>
+    <a class="win-btn" href="assets/Resume.pdf" target="_blank" rel="noopener">
+      Open Resume PDF
+    </a>
   </div>
-  <!-- Content injected by resumeParser.js -->
-  <div class="window-content" id="content-resume"></div>
-  <div class="status-bar">
-    <div class="status-section" id="resume-status">No file loaded</div>
-    <div class="status-section">Ready</div>
-  </div>
+ 
   <div class="resize-handle" id="rh-resume"><span id="rh-svg-resume"></span></div>
 </div>
-
+ 
 <!-- =============================================
      WINDOW: MY PROJECTS
      ============================================= -->
@@ -160,7 +166,7 @@
   </div>
   <div class="resize-handle" id="rh-projects"><span id="rh-svg-projects"></span></div>
 </div>
-
+ 
 <!-- =============================================
      WINDOW: MY SOCIALS
      ============================================= -->
@@ -197,7 +203,7 @@
   </div>
   <div class="resize-handle" id="rh-socials"><span id="rh-svg-socials"></span></div>
 </div>
-
+ 
 <!-- =============================================
      ABOUT DIALOG
      ============================================= -->
@@ -212,10 +218,11 @@
     <div class="dialog-content">
       <div style="font-size:40px;line-height:1;flex-shrink:0;" id="about-logo"></div>
       <div>
-        <div style="font-weight:bold;font-size:14px;margin-bottom:4px;">Samuel's Portfolio V1.0</div>
+        <div style="font-weight:bold;font-size:14px;margin-bottom:4px;">My Portfolio v1.0</div>
         <div style="font-size:11px;margin-bottom:8px;color:#333;">Built with HTML, CSS &amp; JavaScript</div>
         <div style="font-size:11px;">
-          Aspiring Software Engineer who is eager to build and solve real-world problems. 
+          A Windows 97–themed personal profile website.<br>
+          Double-click any desktop icon to open a window.
         </div>
         <div style="margin-top:10px;">
           <div style="font-size:10px;color:#666;">This product is licensed to:</div>
@@ -229,7 +236,7 @@
     </div>
   </div>
 </div>
-
+ 
 <!-- =============================================
      SCRIPTS (load order: config → icons → managers → features)
      ============================================= -->
@@ -238,6 +245,6 @@
 <script src="js/windowManager.js"></script>
 <script src="js/desktop.js"></script>
 <script src="js/app.js"></script>
-
+ 
 </body>
 </html>
