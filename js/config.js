@@ -50,7 +50,7 @@ const CONFIG = {
         "Tailwind CSS",
       ],
       github: "https://github.com/samuelpachuau/tmez-website",
-      demo: "tmez-website.vercel.app",
+      demo: "https://tmez-website.vercel.app",
     },
     {
       title: "REHABit",
